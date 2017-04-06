@@ -1,0 +1,13 @@
+net: "train_bn_image_3split_322.prototxt"
+base_lr: 0.001
+lr_policy: "multistep"
+#stepvalue:10000
+#stepvalue:13000
+#stepvalue:230000
+gamma: 0.5
+max_iter: 1200000
+momentum: 0.9
+weight_decay: 0.0002
+snapshot: 500
+snapshot_prefix: "model/partQAN"
+solver_mode: GPU
