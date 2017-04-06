@@ -29,5 +29,5 @@ Here we list some commonly asked questions we received from the public. Thanks f
 
  There are mainly two.  First is we initialize the network with a pre-trained model for imagenet task in order to make the network converge well and in the training stage, the `use_global_stats` is set to false in the Batchnorm layer; the second is the the parameter such as learning rate, margin in the tripletloss layer will affect the effectiveness of the quality scores and you can adjust the parameters by observing the change of the scores in the training stage.
 
-##Still having questions?
+## Still having questions?
 Feel free to drop us an email sharing your ideas.
