@@ -25,9 +25,9 @@ Running the `train_baseline/train_baseline.m` or `train_baseline/train_LPW.m` fo
 
 Here we list some commonly asked questions we received from the public. Thanks for your engagement to make our work better!
 
-- *Any tricks to make PQAN work?
+- *Any strategies are used to make the quality scores effective?
 
- There are mainly two.  First is we initialize the network with a pre-trained model for imagenet task in order to make the network converge well and in the training stage, the `use_global_stats` is set to false in the Batchnorm layer; the second is the the parameter such as learning rate, margin in the tripletloss layer will affect the effectiveness of the quality scores and you can adjust the parameters by observing the change of the scores in the training stage.
+ There are two main aspects that will affect the effectiveness of the quality scores. One is using a pre-trained model for imagenet task in order to make the network converge well and in the training stage, the use_global_stats is set to false in the Batchnorm layer; The other is the configuration of the parameter like learning rate, margin in the tripletloss layer, and you can adjust the parameters by observing the change of the scores in the training stage.
 
 ## Still having questions?
 Feel free to drop us an email sharing your ideas.
