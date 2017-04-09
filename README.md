@@ -31,3 +31,14 @@ Here we list some commonly asked questions we received from the public. Thanks f
 
 ## Still having questions?
 Feel free to drop us an email sharing your ideas.
+
+
+## Citation
+Please kindly cite our work in your publications if it helps your research:
+
+    @inproceedings{liu_2017_qan,
+      Author = {Liu, Yu and Junjie, Yan and Ouyang, Wanli},
+      Title={Quality Aware Network for Set to Set Recognition},
+	  Booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
+	  Year = {2017}
+    }
