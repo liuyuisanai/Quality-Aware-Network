@@ -6,7 +6,7 @@ Codebase for (Partial) Quality Aware Network. Notice that QAN in ''Quality Aware
 
 **P-QAN** is our subsequent work after QAN. It is used to handle video based person re-identification problem with awareness of partial quality. It can learn not only the quality of each frame but also the occlusion/blur/noise/etc. level in each part of a frame.
 
-We use the [PRID 2011](https://lrs.icg.tugraz.at/datasets/prid/), [iLIDS-VID](www.eecs.qmul.ac.uk/.../downloads_qmul_iLIDS-VID_ReID_dataset.html) and [LPW] datasets for evaluation. It is a video-based task for person re-identification.
+We use the [PRID 2011](https://lrs.icg.tugraz.at/datasets/prid/), [iLIDS-VID](www.eecs.qmul.ac.uk/.../downloads_qmul_iLIDS-VID_ReID_dataset.html) and [LPW] (coming soon) datasets for evaluation. They are video-based tasks for person re-identification.
 
 ## Running code
 
