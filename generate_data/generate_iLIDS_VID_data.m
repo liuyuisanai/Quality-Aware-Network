@@ -1,7 +1,7 @@
 %%generate data config
-param.split_data_num=10;
-param.file_path_cam1='F:\multi_shot\iLIDS-VID\sequences\cam1\';
-param.file_path_cam2='F:\multi_shot\iLIDS-VID\sequences\cam2\';
+param.split_data_num=1;
+param.file_path_cam1=fullfile(fileparts(pwd),'iLIDS-VID','i-LIDS-VID','sequences','cam1');
+param.file_path_cam2=fullfile(fileparts(pwd),'iLIDS-VID','i-LIDS-VID','sequences','cam2');
 param.save_traindata_filename='train_data_iLID';
 param.save_testdata_filename='test_data_iLID';
 %%generate ten split train/test data
@@ -28,7 +28,7 @@ for split_num_start=1:param.split_data_num
     for i=1:(length(subdir_cam1)-2)/2
         fprintf('process train data:%d/%d\n',i,(length(subdir_cam1)-2)/2);
         index=train_data_index(i);
-        image_path_cam1=strcat(param.file_path_cam1,subdir_cam1(index+2).name,'\');
+        image_path_cam1=fullfile(param.file_path_cam1,subdir_cam1(index+2).name,'/');
         image_list_cam1=dir(image_path_cam1);
         for j=3:length(image_list_cam1);
             image_name=strcat(image_path_cam1,image_list_cam1(j).name);
@@ -37,7 +37,7 @@ for split_num_start=1:param.split_data_num
             label_train_cam1=[label_train_cam1;i];
             train_image_name_cam1=[train_image_name_cam1,image_name];
         end
-        image_path_cam2=strcat(param.file_path_cam2,subdir_cam2(index+2).name,'\');
+        image_path_cam2=fullfile(param.file_path_cam2,subdir_cam2(index+2).name,'/');
         image_list_cam2=dir(image_path_cam2);
         for j=3:length(image_list_cam2);
             image_name=strcat(image_path_cam2,image_list_cam2(j).name);
@@ -47,7 +47,7 @@ for split_num_start=1:param.split_data_num
             train_image_name_cam2=[train_image_name_cam2,image_name];
         end
     end
-    save(strcat(param.save_traindata_filename,num2str(split_num_start),'\train_data.mat'),'train_data_cam1','train_data_cam2','label_train_cam1','label_train_cam2','train_image_name_cam1','train_image_name_cam2');
+    save(strcat(param.save_traindata_filename,num2str(split_num_start),'/train_data.mat'),'train_data_cam1','train_data_cam2','label_train_cam1','label_train_cam2','train_image_name_cam1','train_image_name_cam2');
     %generate test data
     test_data_cam1=[];
     label_test_cam1=[];
@@ -58,7 +58,7 @@ for split_num_start=1:param.split_data_num
     for i=1:(length(subdir_cam1)-2)/2
         fprintf('process test data:%d/%d\n',i,(length(subdir_cam1)-2)/2);
         index=test_data_index(i);
-        image_path_cam1=strcat(param.file_path_cam1,subdir_cam1(index+2).name,'\');
+        image_path_cam1=fullfile(param.file_path_cam1,subdir_cam1(index+2).name,'/');
         image_list_cam1=dir(image_path_cam1);
         for j=3:length(image_list_cam1);
             image_name=strcat(image_path_cam1,image_list_cam1(j).name);
@@ -67,7 +67,7 @@ for split_num_start=1:param.split_data_num
             label_test_cam1=[label_test_cam1;i+150];
             test_image_name_cam1=[test_image_name_cam1,image_name];
         end
-        image_path_cam2=strcat(param.file_path_cam2,subdir_cam2(index+2).name,'\');
+        image_path_cam2=fullfile(param.file_path_cam2,subdir_cam2(index+2).name,'/');
         image_list_cam2=dir(image_path_cam2);
         for j=3:length(image_list_cam2);
             image_name=strcat(image_path_cam2,image_list_cam2(j).name);
@@ -77,5 +77,5 @@ for split_num_start=1:param.split_data_num
             test_image_name_cam2=[test_image_name_cam2,image_name];
         end
     end
-    save(strcat(param.save_testdata_filename,num2str(split_num_start),'\test_data.mat'),'test_data_cam1','test_data_cam2','label_test_cam1','label_test_cam2','test_image_name_cam1','test_image_name_cam2');
+    save(strcat(param.save_testdata_filename,num2str(split_num_start),'/test_data.mat'),'test_data_cam1','test_data_cam2','label_test_cam1','label_test_cam2','test_image_name_cam1','test_image_name_cam2');
 end
