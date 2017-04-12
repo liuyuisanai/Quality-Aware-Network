@@ -18,7 +18,7 @@ We use the [PRID 2011](https://lrs.icg.tugraz.at/datasets/prid/), [iLIDS-VID](ww
 
 4.Configure the path `CaffeMex_v2/matlab/+caffe` to the directory in this project.
 
-5.Configure the parameters in `train_baseline/train_baseline.m`, `train_baseline/train_LPW.m` and `train_PQAN/train_LPW.m`, `train_PQAN/train_network_and_test.m`, including the path of prototxt and the relative param.
+5.Configure the parameters in `train_baseline/train_baseline.m`, `train_baseline/train_LPW.m` and `train_PQAN/train_LPW.m`, `train_PQAN/train_network_and_test.m`, including the path of prototxt and the relative param. The pretrain_model can be find in here(https://github.com/lim0606/caffe-googlenet-bn).
 
 6.Running the scripts in the `generate_data` to generate your dataset split.
 
