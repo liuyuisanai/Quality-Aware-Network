@@ -10,9 +10,9 @@ We use the [PRID 2011](https://lrs.icg.tugraz.at/datasets/prid/), [iLIDS-VID](ww
 
 ## Running code
 
-1. Clone [CaffeMex\_v2](https://github.com/sciencefans/CaffeMex_v2);
+1.Clone [CaffeMex\_v2](https://github.com/sciencefans/CaffeMex_v2);
 
-2.Replace `normalization layer (.hpp .cu .cpp)` in `CaffeMex_v2` with `layers/*` and add `NormalizationParameter` to `caffe.proto`;
+~~2.Replace `normalization layer (.hpp .cu .cpp)` in `CaffeMex_v2` with `layers/*` and add `NormalizationParameter` to `caffe.proto`;~~
 
 3.Complile  with matlab interface (see readme in CaffeMex\_v2).
 

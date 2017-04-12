@@ -1,7 +1,7 @@
 for model_index=1:10
     caffe.reset_all;
     net=caffe.get_net(param.test_net_file,'test');
-   % net.copy_from(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(2600),'.caffemodel'));
+   net.copy_from(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(2600),'.caffemodel'));
 %     net.copy_from(param.fintune_model);
     tic;
     fin=fopen(param.result_save_file,'a');

@@ -1,14 +1,18 @@
 
-### Training 150
+### Training Set
 name: "GoogleNet"
 input: "data"
-input_dim: 24
+input_dim: 16
 input_dim: 3
 input_dim: 224
 input_dim: 224
 
 
-
+input: "label"
+input_dim: 16
+input_dim: 1
+input_dim: 1
+input_dim: 1
 
 
 layer {
@@ -1100,7 +1104,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 150
+    num_output: 1975
     weight_filler {
       type: "xavier"
     }
@@ -1110,7 +1114,46 @@ layer {
     }
   }
 }
-
+layer {
+  bottom: "loss1/classifier_1"
+  bottom: "label"
+  top: "loss1/loss"
+  name: "loss1/loss"
+  type: "SoftmaxWithLoss"
+  loss_weight:1
+}
+layer {
+  bottom: "loss1/classifier_1"
+  top: "loss1/prob"
+  name: "loss1/prob"
+  type: "Softmax"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  bottom: "loss1/prob"
+  bottom: "label"
+  top: "loss1/top-1"
+  name: "loss1/top-1"
+  type: "Accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  bottom: "loss1/prob"
+  bottom: "label"
+  top: "loss1/top-5"
+  name: "loss1/top-5"
+  type: "Accuracy"
+  accuracy_param {
+    top_k: 5
+  }
+  include {
+    phase: TEST
+  }
+}
 layer {
  bottom: "inception_3c/output"
   top: "inception_4a/1x1"
@@ -2671,7 +2714,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 150
+    num_output: 1975
     weight_filler {
       type: "xavier"
     }
@@ -2681,7 +2724,46 @@ layer {
     }
   }
 }
-
+layer {
+  bottom: "loss2/classifier_1"
+  bottom: "label"
+  top: "loss2/loss"
+  name: "loss2/loss"
+  type: "SoftmaxWithLoss"
+  loss_weight: 1
+}
+layer {
+  bottom: "loss2/classifier_1"
+  top: "loss2/prob"
+  name: "loss2/prob"
+  type: "Softmax"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  bottom: "loss2/prob"
+  bottom: "label"
+  top: "loss2/top-1"
+  name: "loss2/top-1"
+  type: "Accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  bottom: "loss2/prob"
+  bottom: "label"
+  top: "loss2/top-5"
+  name: "loss2/top-5"
+  type: "Accuracy"
+  accuracy_param {
+    top_k: 5
+  }
+  include {
+    phase: TEST
+  }
+}
 layer {
  bottom: "inception_4e/output"
   top: "inception_5a/1x1"
@@ -3323,7 +3405,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 150
+    num_output: 1975
     weight_filler {
       type: "xavier"
     }
@@ -3333,269 +3415,25 @@ layer {
     }
   }
 }
-
-
-
-## generate score
-
-layer{
-	name: "slice_data1"
-	type: "Slice"
-	bottom: "inception_5b/output"
-	top: "data1_1"
-	top: "data1_2"
-	top: "data1_3"
-	slice_param{
-		axis: 2
-		slice_point:3
-		slice_point:5
-	}
-}
-layer{
-	name:"data1_p_1"
-	bottom:"data1_1"
-	top:"data1_p_1"
-	type:"Pooling"
-	pooling_param {
-    pool: AVE
-    
-    kernel_h:3
-    kernel_w:7
-    stride: 1
-  }
-}
-layer{
-	name:"data1_p_2"
-	bottom:"data1_2"
-	top:"data1_p_2"
-	type:"Pooling"
-	pooling_param {
-    pool: AVE
-    
-    kernel_h:2
-    kernel_w:7
-    stride: 1
-  }
-}
-layer{
-	name:"data1_p_3"
-	bottom:"data1_3"
-	top:"data1_p_3"
-	type:"Pooling"
-	pooling_param {
-    pool: AVE
-    
-    kernel_h:2
-    kernel_w:7
-    stride: 1
-  }
-}
-##convolution
 layer {
- bottom: "pool2/3x3_s2"
-  top: "conv1_sss1"
-  name: "conv1_sss1"
-  type: "Convolution"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 32
-    kernel_size: 3
-    stride: 1
-	pad: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.1
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
+  bottom: "loss3/classifier_1"
+  bottom: "label"
+  top: "loss3/loss"
+  name: "loss3/loss"
+  type: "SoftmaxWithLoss"
+  loss_weight: 1
 }
 layer {
- bottom: "conv1_sss1"
-  top: "conv1_sss2"
-  name: "conv1_sss2"
-  type: "Convolution"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  convolution_param {
-    num_output: 32
-    kernel_size: 3
-    stride: 1
-	pad: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
+  bottom: "loss3/classifier_1"
+  top: "loss3/prob"
+  name: "loss3/prob"
+  type: "Softmax"
 }
 layer {
-  name: "pool_s"
-  type: "Pooling"
-  bottom: "conv1_sss1"
-  top: "pool_s"
-  pooling_param {
-    pool: AVE
-    
-    kernel_h:7
-    kernel_w:7
-    stride: 7
-  }
+  bottom: "loss3/prob"
+  bottom: "label"
+  top: "loss3/top-1"
+  name: "loss3/top-1"
+  type: "Accuracy"
 }
 
-layer {
-  name: "fc1_s"
-  type: "InnerProduct"
-  bottom: "pool2/3x3_s2"
-  top: "fc1_s"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 3
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-	#weight_filler {
-     # type: "xavier"
-    #}
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer{
-	name:"score_reshape"
-	bottom:"fc1_s"
-	top:"score_reshape"
-	type:"Reshape"
-	reshape_param{
-		shape{
-			dim:0
-			dim:-1
-			dim:1
-			dim:1
-		}
-	}
-}
-layer{
-	name: "sig"
-	bottom: "score_reshape"
-	top: "sig"
-	type: "Sigmoid"
-}
-
-layer{
-	name: "slice_score1"
-	type: "Slice"
-	bottom: "sig"
-	top: "score1_1"
-	top: "score1_2"
-	top: "score1_3"
-	slice_param{
-		axis: 1
-		slice_point:1
-		slice_point:2
-	}
-}
-layer{
-	name: "norm1_1"
-	bottom: "score1_1"
-	top: "norm1_1"
-	type: "Normalization"
-    normalization_param{
-		norm: L1
-	}
-}
-layer{
-	name: "norm1_2"
-	bottom: "score1_2"
-	top: "norm1_2"
-	type: "Normalization"
-    normalization_param{
-		norm: L1
-	}
-}
-layer{
-	name: "norm1_3"
-	bottom: "score1_3"
-	top: "norm1_3"
-	type: "Normalization"
-    normalization_param{
-		norm: L1
-	}
-}
-
-layer{
-	name: "feature1_1"
-	bottom: "data1_p_1"
-	bottom: "norm1_1"
-	top: "feature1_1"
-	type: "BatchPool"
-	batch_pool_param{
-		pool: AVE
-	}
-}
-layer{
-	name: "feature1_2"
-	bottom: "data1_p_2"
-	bottom: "norm1_2"
-	top: "feature1_2"
-	type: "BatchPool"
-	batch_pool_param{
-		pool: AVE
-	}
-}
-layer{
-	name: "feature1_3"
-	bottom: "data1_p_3"
-	bottom: "norm1_3"
-	top: "feature1_3"
-	type: "BatchPool"
-	batch_pool_param{
-		pool: AVE
-	}
-}
-
-layer {
-  bottom: "feature1_1"
-  bottom: "feature1_2"
-  bottom: "feature1_3"
-  top: "feature1"
-  name: "feature1"
-  type: "Concat"
-}
-layer{
-	name: "normfeature1"
-	bottom: "feature1"
-	top: "normfeature1"
-	type: "Normalization"
-    normalization_param{
-		norm: L2
-	}
-}

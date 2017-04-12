@@ -1,15 +1,15 @@
 %%train network config
-param.caffe_path='F:\multi_shot\lab_for_paper\release_code\matcaffe';
-param.solver_netfile='solver_bn_pool2.prototxt';
-param.fintune_model='F:\multi_shot\lab_for_paper\train_baseline\googlenet_bn.caffemodel';
-param.test_net_file='test_bn_image_3split_322.prototxt';
+param.caffe_path=fullfile(fileparts(pwd),'matcaffe');
+param.solver_netfile=fullfile(fileparts(pwd),'model','solver_bn_image.prototxt');
+param.fintune_model=fullfile(fileparts(pwd),'pretrain_model','googlenet_bn.caffemodel');
+param.test_net_file=fullfile(fileparts(pwd),'model','test_PQAN_image.prototxt');
 param.test_batch_size=32;
-param.result_save_file='xxx.txt';
+param.result_save_file='result.txt';
 param.save_model_file='ilIDS_VID_model';
 param.save_model_name='PQAN_322_iter';
-param.test_interval=500000;
-param.train_maxiter=10;
-param.data_path='F:\multi_shot\lab_for_paper\generate_data\';
+param.test_interval=500;
+param.train_maxiter=15000;
+param.data_path=fullfile(fileparts(pwd),'generate_data');
 param.traindata_filename='train_data_iLID';
 param.testdata_filename='test_data_iLID';
 param.use_data_split_index=1;
@@ -26,7 +26,9 @@ for split_index=param.use_data_split_index:param.data_split_num
     %% find caffe
     cur_path=pwd;
     cd(param.caffe_path);
+    addpath(genpath(param.caffe_path))
     caffe.reset_all;
+    caffe.init_log(fullfile(cur_path,'log'));
     addpath(param.caffe_path);
     if param.use_gpu
         caffe.set_mode_gpu;
@@ -35,7 +37,7 @@ for split_index=param.use_data_split_index:param.data_split_num
     end
     cd(cur_path);
     caffe_solver=caffe.get_solver(param.solver_netfile,param.gpu_id);
-   % net=caffe.get_net(param.test_net_file,'test');
+    net=caffe.get_net(param.test_net_file,'test');
     caffe_solver.use_caffemodel(param.fintune_model);
     input_data_shape=caffe_solver.nets{1}.blobs('data').shape;
     batch_size=input_data_shape(4);
@@ -67,11 +69,14 @@ for split_index=param.use_data_split_index:param.data_split_num
             plot(train_x_axis,train_y_axis);
             drawnow;
             fprintf('iter= %d ,softmaxloss= %f ,tripletloss= %f,contrastive_loss=%f.loss1=%f  loss2=%f\n',iter,soft_loss,loss,contrastive_loss,loss1,loss2);
+            if soft_loss+loss+contrastive_loss+loss1+loss2 > 80
+                fprintf('stop');
+            end
         end
         % test in the training stage
-        if mod(iter,param.test_interval)==0
+        if iter>10000 && mod(iter,param.test_interval)==0
             caffe_solver.nets{1}.save(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(iter),'.caffemodel'));
-          %  net.copy_from(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(iter),'.caffemodel'));
+            net.copy_from(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(iter),'.caffemodel'));
             net.blobs('data').reshape([224 224 3 param.test_batch_size]);
             load(strcat(param.data_path,param.testdata_filename,num2str(split_index),'/test_data.mat'));
             test_script;
@@ -80,5 +85,5 @@ for split_index=param.use_data_split_index:param.data_split_num
             caffe_solver.nets{1}.save(strcat(param.save_model_file,num2str(split_index),'/',param.save_model_name,'_',num2str(iter),'.caffemodel'));
         end
     end
-    test_network;
+%     test_network;
 end

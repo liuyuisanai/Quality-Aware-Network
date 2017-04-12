@@ -1,0 +1,15 @@
+net: "../model/train_bn.prototxt"
+
+base_lr: 0.001
+lr_policy: "multistep"
+stepvalue: 6400
+stepvalue: 10000
+stepvalue: 16000
+stepvalue: 25000
+gamma: 0.5
+max_iter: 1200000
+momentum: 0.9
+weight_decay: 0.0002
+#snapshot: 500
+#snapshot_prefix: "model/googlenet_roadpede"
+#solver_mode: GPU
