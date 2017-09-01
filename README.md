@@ -1,6 +1,6 @@
 ## Quality Aware Network
 
-Codebase for (Partial) Quality Aware Network. Notice that QAN in ''Quality Aware Network for Set to Set Recognition'' is a 'single-part' version of P-QAN in ''Unsupervised Partial Quality Predictor for Large-Scale Person Re-identification'', so you can set part number to 1 if you wanna reproduce results of QAN.
+Codebase for (Partial) [Quality Aware Network](https://arxiv.org/abs/1704.03373). Notice that QAN in ''Quality Aware Network for Set to Set Recognition'' is a 'single-part' version of P-QAN in ''Unsupervised Partial Quality Predictor for Large-Scale Person Re-identification'', so you can set part number to 1 if you wanna reproduce results of QAN.
 
 **QAN** is used to handle set-to-set recognition problem. It can automatically learn the quality score for each sample in a set, and use the score to be the weight for synthesizing feature.
 
