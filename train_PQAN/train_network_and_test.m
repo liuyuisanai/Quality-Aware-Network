@@ -1,6 +1,6 @@
 %%train network config
 param.caffe_path=fullfile(fileparts(pwd),'matcaffe');
-param.solver_netfile=fullfile(fileparts(pwd),'model','solver_bn_image.prototxt');
+param.solver_netfile=fullfile(fileparts(pwd),'model','solver_PQAN_image.prototxt');
 param.fintune_model=fullfile(fileparts(pwd),'pretrain_model','googlenet_bn.caffemodel');
 param.test_net_file=fullfile(fileparts(pwd),'model','test_PQAN_image.prototxt');
 param.test_batch_size=32;
