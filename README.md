@@ -31,7 +31,7 @@ Here we list some commonly asked questions we received from the public. Thanks f
 
 - *What is `LPW`?
 
- Labeled Pedestrian in the Wild (LPW) is a large scale human re-identification dataset that we collected in three different crowed scenes. We haven't released it now but if you are interested in it, please contact us by e-mail.
+ Labeled Pedestrian in the Wild (LPW) is a large scale human re-identification dataset that we collected in three different crowed scenes. ~~We haven't released it now but if you are interested in it, please contact us by e-mail.~~ Now you can download it at http://liuyu.us/dataset/lpw/.
 
 - *Any strategies are used to make the quality scores effective?
 
